@@ -1,193 +1,186 @@
-# Application de Recherche de Films
+# Application de Recherche de Films - TMDb API
 
-Une application web PHP permettant de rechercher des informations sur des films en utilisant l'API The Movie Database (TMDb).
+Une application web PHP permettant de rechercher des informations sur des films via l'API The Movie Database (TMDb).
 
-## 📋 Description
+## 🌐 Démonstration en ligne
 
-Cette application permet aux utilisateurs de rechercher des films et d'afficher leurs informations détaillées telles que le titre, le réalisateur, l'année de sortie, le synopsis, et l'affiche. L'interface est responsive et utilise Bootstrap pour un design moderne et adaptatif.
+**URL de démonstration : https://tmdb.karimguessab.fr/
 
-## 🚀 Fonctionnalités
+> L'application est actuellement déployée et fonctionnelle. Vous pouvez tester toutes les fonctionnalités directement en ligne.
 
-- **Recherche de films** : Recherche par titre de film
-- **Affichage détaillé** : Titre, réalisateur, année, synopsis, note moyenne et affiche
-- **Interface responsive** : Compatible desktop, tablette et mobile
-- **Historique des recherches** : Enregistrement automatique dans un fichier log
-- **Gestion d'erreurs** : Messages d'erreur informatifs pour l'utilisateur
+## 🎯 Fonctionnalités
 
-## 🛠️ Technologies utilisées
+- **Recherche de films** : Interface de recherche intuitive par titre
+- **Affichage détaillé** : Informations complètes sur les films (titre, réalisateur, année, synopsis, poster)
+- **Design responsive** : Compatible mobile, tablette et desktop
+- **Logging automatique** : Enregistrement de toutes les recherches effectuées
+- **Configuration sécurisée** : Clé API stockée dans un fichier de configuration
+
+## 🛠️ Technologies Utilisées
 
 - **Backend** : PHP 7.4+ (sans framework)
 - **Frontend** : HTML5, CSS3, Bootstrap 5
-- **API** : The Movie Database (TMDb) API
+- **API** : The Movie Database (TMDb) API v3
 - **Versioning** : Git
+- **Logging** : Système de logs personnalisé
 
-## 📦 Installation
-
-### Prérequis
+## 📋 Prérequis
 
 - PHP 7.4 ou supérieur
 - Extension PHP cURL activée
-- Serveur web (Apache, Nginx, ou serveur de développement PHP)
-- Clé API TMDb
+- Serveur web (Apache/Nginx) ou serveur de développement PHP
+- Clé API TMDb (gratuite)
 
-### Configuration
+## 🚀 Installation
 
 1. **Cloner le repository**
    ```bash
-   git clone https://github.com/karim-guess/TMDb-webservice.git
-   cd TMDb-webservice
+   git clone https://tmdb.karimguessab.fr/
+   cd TMDB-webservice
    ```
 
 2. **Configuration de l'API**
-   
-   Créer un fichier `config.php` à la racine du projet :
+   - Créer un compte sur [TMDb](https://www.themoviedb.org/)
+   - Obtenir une clé API gratuite
+   - Dupliquer le fichier `config/config.php.example` vers `config/config.php`
+   - Renseigner votre clé API dans le fichier de configuration
+
    ```php
    <?php
    return [
-       'tmdb_api_key' => 'VOTRE_CLE_API_TMDB',
+       'tmdb_api_key' => 'VOTRE_CLE_API_ICI',
        'tmdb_base_url' => 'https://api.themoviedb.org/3',
        'tmdb_image_base_url' => 'https://image.tmdb.org/t/p/w500'
    ];
-   ?>
    ```
 
-3. **Obtenir une clé API TMDb**
-   - Créer un compte sur [The Movie Database](https://www.themoviedb.org/)
-   - Aller dans les paramètres de votre compte → API
-   - Demander une clé API et suivre les instructions
-   - Copier la clé dans le fichier `config.php`
-
-4. **Permissions**
+3. **Lancement de l'application**
+   
+   **Option A : Serveur de développement PHP**
    ```bash
-   chmod 755 logs/
-   chmod 664 logs/search.log
+   php -S localhost:8000 -t public
    ```
+   
+   **Option B : Serveur web traditionnel**
+   - Pointer le DocumentRoot vers le dossier `public/`
+   - Accéder via votre domaine local
 
-## 🖥️ Utilisation
-
-### Démarrage du serveur
-
-**Option 1 : Serveur de développement PHP**
-```bash
-php -S localhost:8000
-```
-
-**Option 2 : Serveur web traditionnel**
-Placer les fichiers dans le répertoire web de votre serveur (htdocs, www, etc.)
-
-### Utilisation de l'application
-
-1. Accéder à l'application via votre navigateur
-2. Saisir le titre d'un film dans le champ de recherche
-3. Cliquer sur "Rechercher" ou appuyer sur Entrée
-4. Consulter les résultats affichés avec toutes les informations du film
-
-## 📁 Structure du projet
+## 📁 Structure du Projet
 
 ```
-movie-search-app/
-│
+TMDB-webservice/
 ├── config/
-│   ├── config.php           # Configuration (clé API, URLs)
-│   └── Logger.php           # Classe pour la gestion des logs
-├── logs/
-│   └── search.log           # Fichier de log des recherches
+│   ├── config.php              # Configuration de l'API
+│   └── logger.php              # Configuration du logging
 ├── public/
 │   ├── assets/
-│   ├── css/
-│   │   └── style.css        # Styles personnalisés
-│   │   └── boostrap.min.css # Styles personnalisés
-│   └── js/
-│       └── app.js           # Scripts JavaScript
-│   │   └── boostrap.min.js  # Styles personnalisés
-│   └──index.php                 # Page principale de l'application
-└── README.md                # Documentation
+│   │   ├── css/
+│   │   │   ├── bootstrap.min.css
+│   │   │   └── style.min.css
+│   │   └── js/
+│   │       ├── app.min.js
+│   │       └── bootstrap.min.js
+│   ├── api.php                 # Point d'entrée API
+│   └── index.php               # Page principale
+├── src/
+│   ├── Models/
+│   │   └── DatabaseManager.php # (si base de données)
+│   ├── Services/
+│   │   └── TMDbService.php     # Service d'intégration TMDb
+│   └── Utils/
+│       └── Utils.php           # Utilitaires et helpers
+├── logs/
+│   └── searches.log            # Fichier de logs des recherches
+├── .gitignore
+└── README.md
 ```
 
-## 🏗️ Choix de conception
+## 🎨 Choix de Conception
 
 ### Architecture
+- **Séparation des responsabilités** : Services, Models, Utils dans des dossiers distincts
+- **Configuration externalisée** : Clé API et paramètres dans un fichier dédié
+- **Logging centralisé** : Toutes les recherches enregistrées avec horodatage
 
-- **Approche orientée objet** : Utilisation de classes pour organiser le code
-- **Séparation des responsabilités** : Service API séparé de la logique d'affichage
-- **Configuration centralisée** : Toutes les configurations dans un fichier dédié
+### Interface Utilisateur
+- **Bootstrap 5** : Framework CSS moderne et responsive
+- **Design mobile-first** : Optimisé pour tous les écrans
+- **UX intuitive** : Interface simple et claire
+- **Feedback visuel** : Loading states et messages d'erreur
 
 ### Sécurité
+- **Validation des inputs** : Sanitisation des données utilisateur
+- **Gestion d'erreurs** : Messages d'erreur appropriés sans exposition d'informations sensibles
+- **Configuration protégée** : Clé API non versionnée dans Git
 
-- **Validation des entrées** : Filtrage et validation des données utilisateur
-- **Gestion des erreurs** : Messages d'erreur sécurisés sans exposition d'informations sensibles
-- **Protection XSS** : Échappement des données avant affichage
+## 🔍 Utilisation
 
-### Performance
+1. **Recherche simple**
+   - Saisir le titre d'un film dans la barre de recherche
+   - Cliquer sur "Rechercher" ou appuyer sur Entrée
+   - Parcourir les résultats affichés
 
-- **Cache des images** : Utilisation du cache navigateur pour les affiches
-- **Requêtes optimisées** : Une seule requête API par recherche
-- **Code léger** : Pas de dépendances externes lourdes
+2. **Détails d'un film**
+   - Cliquer sur un film dans les résultats
+   - Consulter les informations détaillées (synopsis, date de sortie, etc.)
 
-## 📊 Système de logs
+3. **Consultation des logs**
+   - Les recherches sont automatiquement enregistrées dans `logs/searches.log`
+   - Format : `[YYYY-MM-DD HH:mm:ss] - Recherche: "terme_recherché"`
 
-Toutes les recherches sont automatiquement enregistrées dans `logs/search.log` avec le format :
+## 🚨 Limitations Connues
+
+- **Limite de l'API TMDb** : 1000 requêtes par jour pour les comptes gratuits
+- **Pas de cache** : Chaque recherche interroge directement l'API
+- **Langue par défaut** : Résultats en français, configurable dans le service
+- **Pas d'authentification** : Application accessible publiquement
+
+## 📊 Améliorations Possibles
+
+- **Cache Redis/Memcached** : Réduire les appels API
+- **Pagination** : Pour les résultats nombreux
+- **Favoris** : Système de films favoris avec base de données
+- **Filtres avancés** : Par genre, année, note, etc.
+- **API REST** : Transformation en API pour usage mobile
+
+## 🧪 Tests
+
+**Tests en ligne :**
+- Accéder à la démo : [http://54.38.214.153/TMDb-webservice/public/](http://54.38.214.153/TMDb-webservice/public/)
+- Tester la recherche avec différents termes : "Inception", "Avengers", "Titanic"
+- Vérifier la responsivité sur mobile/tablette
+
+**Tests en local :**
+```bash
+# Tester l'API directement
+curl "http://localhost:8000/api.php?search=Inception"
+
+# Vérifier les logs des recherches
+tail -f logs/searches.log
 ```
-[2024-01-15 14:30:25] Recherche: "Inception" - Résultats: 1 film(s) trouvé(s)
-[2024-01-15 14:32:10] Recherche: "Matrix" - Résultats: 3 film(s) trouvé(s)
-```
-
-## 🔧 API TMDb
-
-### Endpoints utilisés
-
-- **Recherche** : `/search/movie`
-- **Crédits** : `/movie/{id}/credits`
-- **Images** : Configuration d'images via `/configuration`
-
-### Limites de l'API
-
-- 1000 requêtes par jour pour les comptes gratuits
-- Certaines informations peuvent être manquantes selon les films
-- Les images peuvent ne pas être disponibles pour tous les films
-
-## 🐛 Limitations connues
-
-1. **Dépendance internet** : L'application nécessite une connexion internet pour fonctionner
-2. **Limite API** : Soumise aux limitations de l'API TMDb gratuite
-3. **Langue** : Les résultats sont principalement en anglais (configurable)
-4. **Réalisateur** : Parfois indisponible selon les données TMDb
-
-## 🚀 Améliorations possibles
-
-- Ajout d'un système de cache local
-- Implémentation de la pagination pour les résultats multiples
-- Ajout de filtres avancés (genre, année, note)
-- Sauvegarde des favoris en session/cookie
-- Interface d'administration pour consulter les logs
-- Support multilingue
-- Ajout d'un système de suggestion de recherche
 
 ## 🤝 Contribution
 
-1. Fork le project
-2. Créer une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-fonctionnalite`)
-3. Commit vos changements (`git commit -am 'Ajout nouvelle fonctionnalité'`)
-4. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
+1. Fork du projet
+2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
+3. Commit des changements (`git commit -m 'Add AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
 5. Ouvrir une Pull Request
 
-## 📝 Commits Git
+## 📝 Versioning
 
-Le développement suit une approche par étapes avec des commits logiques :
-
-1. Initial commit - Structure de base
-2. Configuration API et service TMDb
-3. Interface utilisateur Bootstrap
-4. Système de recherche
-5. Gestion des erreurs
-6. Système de logs
-7. Responsive design
-8. Documentation
-
-## 📞 Support
-
-Pour toute question ou problème, veuillez créer une issue dans le repository Git.
+Utilisation de [Git](https://git-scm.com/) pour le versioning. Voir les [tags](https://github.com/votre-username/TMDB-webservice/tags) pour les versions disponibles.
 
 ## 📄 Licence
 
-Ce projet est développé dans le cadre d'un test technique pour Lemon Interactive.
+Ce projet est sous licence MIT - voir le fichier [LICENSE.md](LICENSE.md) pour plus de détails.
+
+## 👨‍💻 Auteur
+
+**Karim Guessab** - *Développement initial*
+
+## 🙏 Remerciements
+
+- [The Movie Database (TMDb)](https://www.themoviedb.org/) pour l'API
+- [Bootstrap](https://getbootstrap.com/) pour le framework CSS
+- L'équipe Lemon Interactive pour l'opportunité

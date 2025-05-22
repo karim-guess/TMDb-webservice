@@ -34,8 +34,8 @@ Cette application permet aux utilisateurs de rechercher des films et d'afficher 
 
 1. **Cloner le repository**
    ```bash
-   git clone [URL_DU_REPOSITORY]
-   cd movie-search-app
+   git clone [[URL_DU_REPOSITORY](https://github.com/karim-guess/TMDb-webservice.git)]
+   cd mTMDb-webservice
    ```
 
 2. **Configuration de l'API**

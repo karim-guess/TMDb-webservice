@@ -146,7 +146,7 @@ TMDB-webservice/
 ## 🧪 Tests
 
 **Tests en ligne :**
-- Accéder à la démo : [http://54.38.214.153/TMDb-webservice/public/](http://54.38.214.153/TMDb-webservice/public/)
+- Accéder à la démo : https://tmdb.karimguessab.fr/
 - Tester la recherche avec différents termes : "Inception", "Avengers", "Titanic"
 - Vérifier la responsivité sur mobile/tablette
 

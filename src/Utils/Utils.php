@@ -20,7 +20,7 @@ class Utils
     /**
      * Génère une image placeholder éco-responsable
      */
-    public static function getPlaceholderImage($width = 300, $height = 450)
+    public static function getPlaceholderImage($width = 300, $height = 450): string
     {
         $color1 = 'a7e3d0'; // Vert clair du thème
         $color2 = '0a5045'; // Vert foncé du thème

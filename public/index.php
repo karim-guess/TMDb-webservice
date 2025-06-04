@@ -35,7 +35,6 @@ $metadata = Utils::generateMetadata();
 
     <!-- CSS optimisé -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/style.min.css" rel="stylesheet">
 
     <!-- Préchargement des ressources critiques -->
     <link rel="preload" href="assets/js/app.min.js" as="script">

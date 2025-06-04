@@ -6,7 +6,7 @@
 
 class DatabaseManager
 {
-    private $pdo;
+    public $pdo;
     private static ?DatabaseManager $instance = null;
 
     private function __construct()
@@ -52,16 +52,10 @@ class DatabaseManager
                 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             );
 
-
             CREATE INDEX IF NOT EXISTS idx_movies_tmdb_id ON movies(tmdb_id);
         ";
 
         $this->pdo->exec($sql);
-    }
-
-    public function getPdo(): PDO
-    {
-        return $this->pdo;
     }
 
     public function getMovie($tmdbId)
@@ -97,5 +91,4 @@ class DatabaseManager
             isset($movieData['cast']) ? json_encode($movieData['cast']) : ''
         ]);
     }
-
 }
